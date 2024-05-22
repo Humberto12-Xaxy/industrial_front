@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const url = 'http://127.0.0.1:8000';
+const url = 'https://industrial-pvbr.onrender.com';
 
 export const getProcesses = async () => {
     return await axios.get(`${url}/`);
