@@ -13,9 +13,10 @@ export const Process = (props) => {
     return (
         <>
             <AppBarProcess />
-            {
+            <FormProcess /> 
+            {/* {
                 state === 1 ? <FormProcess /> :< TableProcess />
-            }
+            } */}
         </>
     )
 }

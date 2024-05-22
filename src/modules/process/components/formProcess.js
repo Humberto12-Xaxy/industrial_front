@@ -4,6 +4,8 @@ import { Box, TextField, Button, Typography } from "@mui/material";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useParams } from "react-router-dom";
+import { createFactors, createSuplements } from "../../../api/api";
 
 
 const validateSchema = yup.object({
@@ -12,42 +14,42 @@ const validateSchema = yup.object({
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        esfuerzo: yup
+    esfuerzo: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        condiciones: yup
+    condiciones: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        consistencia: yup
+    consistencia: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        necesidad: yup
+    necesidad: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        fatiga: yup
+    fatiga: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        dePie: yup
+    dePie: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        postura: yup
+    postura: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
         .typeError('Debe ser un número'),
-        fuerza: yup
+    fuerza: yup
         .number('Introduzca un valor')
         .min(0, 'No puede ser negativo')
         .required('Este campo es requerido')
@@ -55,6 +57,19 @@ const validateSchema = yup.object({
 })
 
 export const FormProcess = (props) => {
+
+    const submitFactors = async (factors) => {
+        const response_factors = await createFactors(factors);
+        console.log(response_factors)
+    }
+
+    const submitSuplements = async (suplements) => {
+        const response_suplements = await createSuplements(suplements);
+        console.log(response_suplements)
+    }
+
+
+    const { id } = useParams();
 
     const formik = useFormik({
         initialValues: {
@@ -70,6 +85,26 @@ export const FormProcess = (props) => {
         },
         validationSchema: validateSchema,
         onSubmit: (values) => {
+            const factors = {
+                'habilidad': parseFloat(values.habilidad),
+                'esfuerzo': parseFloat(values.esfuerzo),
+                'condiciones': parseFloat(values.condiciones),
+                'consistencia': parseFloat(values.consistencia),
+                'idproceso': parseInt(id)
+            }
+
+            const suplements = {
+                'necesidades': parseFloat(values.necesidad),
+                'fatiga': parseFloat(values.fatiga),
+                'depie': parseFloat(values.dePie),
+                'postura': parseFloat(values.postura),
+                'fuerza': parseFloat(values.fuerza),
+                'idproceso': parseInt(id)
+            }
+
+            submitFactors(factors)
+            submitSuplements(suplements)
+
             alert(JSON.stringify(values, null, 2));
         },
 
@@ -114,7 +149,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '40px', marginTop: '10%' }}
                         value={formik.values.habilidad}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.habilidad && formik.errors.habilidad}
                     />
 
@@ -126,7 +161,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '40px' }}
                         value={formik.values.esfuerzo}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.esfuerzo && formik.errors.esfuerzo}
                     />
 
@@ -138,7 +173,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '40px' }}
                         value={formik.values.condiciones}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.condiciones && formik.errors.condiciones}
                     />
 
@@ -150,7 +185,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '10%' }}
                         value={formik.values.consistencia}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.consistencia && formik.errors.consistencia}
                     />
 
@@ -169,7 +204,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '7%' }}
                         value={formik.values.necesidad}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.necesidad && formik.errors.necesidad}
                     />
 
@@ -181,7 +216,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '7%' }}
                         value={formik.values.fatiga}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.fatiga && formik.errors.fatiga}
                     />
 
@@ -197,7 +232,7 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '7%' }}
                         value={formik.values.dePie}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.dePie && formik.errors.dePie}
                     />
 
@@ -209,20 +244,20 @@ export const FormProcess = (props) => {
                         style={{ width: '80%', marginBottom: '7%' }}
                         value={formik.values.postura}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
+                        onBlur={formik.handleBlur}
                         helperText={formik.touched.postura && formik.errors.postura}
                     />
 
                     <TextField
-                        id="energia"
-                        name="energia"
+                        id="fuerza"
+                        name="fuerza"
                         label="Energía Muscular"
                         variant="outlined"
                         style={{ width: '80%', marginBottom: '7%' }}
-                        value={formik.values.energia}
+                        value={formik.values.fuerza}
                         onChange={formik.handleChange}
-                        onblur={formik.handleBlur}
-                        helperText={formik.touched.energia && formik.errors.energia}
+                        onBlur={formik.handleBlur}
+                        helperText={formik.touched.fuerza && formik.errors.fuerza}
                     />
 
                     <Button
@@ -234,7 +269,6 @@ export const FormProcess = (props) => {
                             background: '#4740FF'
                         }}
                         type="submit"
-                        onSubmit={formik.handleSubmit}
                     >
                         Enviar datos
                     </Button>

@@ -10,3 +10,11 @@ export const getProcesses = async () => {
 export const createProcess = async (data) => {
     return await axios.post(`${url}/createProcess`, data);
 }
+
+export const createFactors = async (data) => {
+    return await axios.post(`${url}/createFactor`, data);
+}
+
+export const createSuplements = async (data) => {
+    return await axios.post(`${url}/createSuplement`, data);
+}

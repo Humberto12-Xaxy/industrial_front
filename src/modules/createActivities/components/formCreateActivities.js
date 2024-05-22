@@ -53,8 +53,7 @@ export const FormCreateActivities = (props) => {
             is_done : false,
             activities : activityNames
         }
-
-        console.log(data)
+        
         const response = await createProcess(data);
         console.log(response)
         navigate('/home');
