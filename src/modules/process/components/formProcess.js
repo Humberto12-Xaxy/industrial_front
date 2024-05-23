@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
 import { createFactors, createSuplements } from "../../../api/api";
+import ittgLogo from "./westing-house.jpg";
 
 
 const validateSchema = yup.object({
@@ -128,6 +129,21 @@ export const FormProcess = (props) => {
             <Typography variant="h1" component="div" sx={{ fontSize: 25 }}>
                 Añadir Factores de calificación
             </Typography>
+
+            <Box
+                sx={{
+                    width: '50%',
+                    height: '100%',
+                    marginLeft: '100%',
+                    marginTop: '10px'
+                }}
+                display={'flex'}
+                justifyContent={'center'}
+                alignItems={'normal'}
+                flexDirection={'column'}
+            >
+                <img src={ittgLogo} alt="westHill" style={{ width: '90%', height: '90%' }} />
+            </Box>
 
             <Box
                 sx={{
